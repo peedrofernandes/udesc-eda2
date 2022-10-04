@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-
 void printVet(int *vet, int vetSize) {
   printf("Vetor gerado: \n[");
   for (int i = 0; i < vetSize; i++) {
@@ -17,11 +16,6 @@ int main() {
   srand(time(NULL));
   int vetSize, n;
 
-  printf("Digite um numero inteiro: ");
-  scanf("%d", &n);
-
-  char *status = "false";
-
   do {
     printf("Digite o tamanho do vetor (max: 32): ");
     scanf("%d", &vetSize);
@@ -33,24 +27,21 @@ int main() {
 
   int *vet = malloc(vetSize * sizeof(int));
 
-  for (int i = 0; i < vetSize; i++) {
-    vet[i] = rand() % 100;
-    if (status == "false") {
-      for (int j = 0; j < i; j++) {
-        if (vet[i] + vet[j] == n) {
-          status = "true";
-          printf("vet[%d] = %d\n", i, vet[i]);
-          printf("vet[%d] = %d\n", j, vet[j]);
-        }
-      } 
-    }
-  }
+  for (int i = 0; i < vetSize; i++)
+    vet[i] = rand() % 10;
 
   printVet(vet, vetSize);
 
-  printf("%s\n", status);
+  int maxValue = 0;
 
-  free(vet);
+  for (int i = 0; i < vetSize; i++) {
+    int init = i % 2 == 0 ? 0 : 1;
+    int sum = 0;
+    for (int j = init; j < vetSize; j += 2)
+      sum += vet[j];
+    if (sum > maxValue)
+      maxValue = sum;
+  }
 
-  return 0;
+  printf("Maior soma de elementos nao-adjacentes: %d\n", maxValue);
 }
