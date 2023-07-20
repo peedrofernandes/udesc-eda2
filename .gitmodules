@@ -1,0 +1,3 @@
+[submodule "trees-analysis"]
+	path = trees-analysis
+	url = https://github.com/peedrofernandes/trees-analysis.git
